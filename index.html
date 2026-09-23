@@ -4,28 +4,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>DESIGN PROTOTYPE｜さとりねこ AI研究ラボ</title>
+<title>さとりねこ AI研究ラボ</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 :root {
-  --paper:#f5f0e6;
-  --paper2:#fcfaf4;
-  --ink:#34312d;
-  --sub:#777064;
-  --line:#d8cfbf;
-  --accent:#9b5148;
+  --paper: #f5f0e6;
+  --paper2: #fcfaf4;
+  --ink: #34312d;
+  --sub: #777064;
+  --line: #d8cfbf;
+  --accent: #9b5148;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  margin:0;
-  color:var(--ink);
-  font-family:-apple-system,BlinkMacSystemFont,
-    "Hiragino Sans","Yu Gothic",sans-serif;
+  margin: 0;
+  color: var(--ink);
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Hiragino Sans",
+    "Yu Gothic",
+    sans-serif;
 
   background:
-    linear-gradient(rgba(247,243,234,.96),rgba(247,243,234,.96)),
+    linear-gradient(
+      rgba(247,243,234,.96),
+      rgba(247,243,234,.96)
+    ),
     repeating-linear-gradient(
       35deg,
       #ddd5c5 0,
@@ -35,1004 +49,352 @@ body {
     );
 }
 
+
+/* --------------------
+   HEADER
+-------------------- */
+
 header {
-  width:min(800px,92%);
-  margin:auto;
-  padding:42px 0 30px;
+  width: min(800px, 92%);
+  margin: auto;
+  padding: 70px 0 45px;
 }
 
-.back {
-  color:var(--sub);
-  text-decoration:none;
-  font-size:12px;
-}
+.eyebrow {
+  margin-bottom: 15px;
 
-.lab {
-  margin-top:35px;
-  font-size:10px;
-  letter-spacing:.22em;
-  color:var(--accent);
-}
-
-h1 {
-  margin:9px 0 10px;
-  font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
-  font-size:clamp(30px,7vw,46px);
-  font-weight:500;
-}
-
-.lead {
-  color:var(--sub);
-  font-size:13px;
-  line-height:1.9;
-  max-width:600px;
-}
-
-main {
-  width:min(800px,92%);
-  margin:auto;
-  padding-bottom:80px;
-}
-
-.card {
-  background:rgba(255,253,247,.9);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:24px;
-  margin-bottom:18px;
-  box-shadow:0 6px 22px rgba(60,50,35,.05);
-}
-
-.step {
-  font-size:10px;
-  letter-spacing:.18em;
-  color:var(--accent);
-  margin-bottom:7px;
-}
-
-h2 {
-  margin:0 0 10px;
-  font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
-  font-size:21px;
-  font-weight:500;
-}
-
-h3 {
-  margin:25px 0 10px;
-  font-size:13px;
-}
-
-p {
-  font-size:13px;
-  line-height:1.8;
-}
-
-.small {
-  font-size:11px;
-  color:var(--sub);
-}
-
-.options {
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:9px;
-}
-
-.option {
-  position:relative;
-}
-
-.option input {
-  position:absolute;
-  opacity:0;
-}
-
-.option label {
-  display:block;
-  padding:13px 8px;
-  text-align:center;
-  background:#faf7ef;
-  border:1px solid var(--line);
-  border-radius:11px;
-  font-size:12px;
-  cursor:pointer;
-}
-
-.option input:checked + label {
-  background:var(--ink);
-  color:#fff;
-  border-color:var(--ink);
-}
-
-.color-panel {
-  display:none;
-  margin-top:15px;
-  padding:16px;
-  border-radius:13px;
-  background:#f4efe4;
-}
-
-.color-row {
-  display:grid;
-  grid-template-columns:45px 1fr 1.2fr;
-  gap:9px;
-  align-items:center;
-  margin-top:10px;
-}
-
-input[type="color"] {
-  width:45px;
-  height:45px;
-  border:0;
-  padding:0;
-  background:transparent;
-}
-
-.text-input,
-textarea {
-  width:100%;
-  border:1px solid var(--line);
-  border-radius:9px;
-  background:white;
-  padding:11px;
-  color:var(--ink);
-  font:inherit;
-  font-size:12px;
-}
-
-textarea {
-  min-height:85px;
-  resize:vertical;
-  line-height:1.7;
-}
-
-.presets {
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  margin-top:13px;
-}
-
-.presets button {
-  width:auto;
-  margin:0;
-  padding:8px 10px;
-  border:1px solid var(--line);
-  background:white;
-  color:var(--ink);
-  font-size:10px;
-}
-
-button {
-  width:100%;
-  margin-top:15px;
-  padding:14px;
-  border:0;
-  border-radius:11px;
-  cursor:pointer;
-  font-size:13px;
-}
-
-.generate {
-  background:var(--accent);
-  color:white;
-}
-
-.copy {
-  background:var(--ink);
-  color:white;
-}
-
-.prompt {
-  min-height:150px;
-  white-space:pre-wrap;
-  background:#f1ece1;
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:16px;
-  font-size:12px;
-  line-height:1.8;
-}
-
-.notice {
-  margin-top:17px;
-  padding-left:13px;
-  border-left:3px solid var(--accent);
-  color:var(--sub);
-  font-size:11px;
-  line-height:1.8;
-}
-
-.sample-grid {
-  display:grid;
-  grid-template-columns:1fr 36px 1fr;
-  gap:10px;
-  align-items:center;
-  margin-top:17px;
-}
-
-.sample-box {
-  aspect-ratio:1/1;
-  border:1px dashed #bbb2a3;
-  border-radius:12px;
-  background:#eee8dc;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  overflow:hidden;
-  padding:10px;
-  color:#827b70;
-  font-size:11px;
-}
-
-.sample-box img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.arrow {
-  text-align:center;
-  color:var(--sub);
-  font-size:19px;
-}
-
-.chips {
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  margin-top:14px;
-}
-
-.chip {
-  display:flex;
-  gap:6px;
-  align-items:center;
-  padding:6px 9px;
-  border:1px solid var(--line);
-  border-radius:999px;
-  background:#faf7ef;
-  font-size:10px;
-}
-
-.dot {
-  width:12px;
-  height:12px;
-  border-radius:50%;
-  border:1px solid rgba(0,0,0,.15);
-}
-
-footer {
-  padding:25px;
-  text-align:center;
-  color:#91897d;
-  font-size:10px;
-}
-
-@media(max-width:550px) {
-  .color-row {
-    grid-template-columns:45px 1fr;
-  }
-
-  .color-name {
-    grid-column:1 / -1;
-  }
-
-  .sample-grid {
-    grid-template-columns:1fr;
-  }
-
-  .arrow {
-    transform:rotate(90deg);
-  }
-}
-
-.hero-sample {
-  margin-top: 28px;
-}
-
-.hero-sample img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  box-shadow: 0 8px 26px rgba(60,50,35,.08);
-}
-
-.hero-caption {
-  padding: 13px 4px 0;
-}
-
-.hero-caption span {
-  font-size: 9px;
-  letter-spacing: .18em;
+  font-size: 10px;
+  letter-spacing: .24em;
   color: var(--accent);
 }
 
-.hero-caption p {
-  margin: 6px 0 0;
-  color: var(--sub);
-  font-size: 11px;
-  line-height: 1.8;
+h1 {
+  margin: 0;
+
+  font-family:
+    "Hiragino Mincho ProN",
+    "Yu Mincho",
+    serif;
+
+  font-size: clamp(34px, 9vw, 58px);
+  line-height: 1.25;
+  font-weight: 500;
 }
 
+.english-title {
+  margin-top: 12px;
+
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: var(--sub);
+}
+
+.intro {
+  max-width: 570px;
+  margin-top: 35px;
+
+  font-size: 13px;
+  line-height: 2;
+  color: var(--sub);
+}
+
+
+/* --------------------
+   MAIN
+-------------------- */
+
+main {
+  width: min(800px, 92%);
+  margin: auto;
+  padding-bottom: 100px;
+}
+
+.section-label {
+  margin-bottom: 14px;
+
+  font-size: 9px;
+  letter-spacing: .2em;
+  color: var(--accent);
+}
+
+
+/* --------------------
+   LAB CARD
+-------------------- */
+
+.lab-card {
+  position: relative;
+  display: block;
+
+  margin-bottom: 18px;
+  padding: 27px;
+
+  color: var(--ink);
+  text-decoration: none;
+
+  background: rgba(255,253,247,.9);
+
+  border: 1px solid var(--line);
+  border-radius: 18px;
+
+  box-shadow:
+    0 6px 22px rgba(60,50,35,.05);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    border-color .2s ease;
+}
+
+.lab-card:not(.coming):hover {
+  transform: translateY(-2px);
+
+  border-color: #bbaea0;
+
+  box-shadow:
+    0 10px 28px rgba(60,50,35,.09);
+}
+
+.lab-number {
+  margin-bottom: 12px;
+
+  font-size: 9px;
+  letter-spacing: .2em;
+  color: var(--accent);
+}
+
+.lab-card h2 {
+  margin: 0 0 13px;
+
+  font-family:
+    "Hiragino Mincho ProN",
+    "Yu Mincho",
+    serif;
+
+  font-size: clamp(23px, 6vw, 32px);
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+.lab-card p {
+  max-width: 590px;
+  margin: 0;
+
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--sub);
+}
+
+.open {
+  display: inline-block;
+  margin-top: 22px;
+
+  font-size: 10px;
+  letter-spacing: .12em;
+  color: var(--accent);
+}
+
+.coming {
+  opacity: .55;
+  cursor: default;
+}
+
+.coming-label {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 6px 10px;
+
+  border: 1px solid var(--line);
+  border-radius: 999px;
+
+  font-size: 9px;
+  letter-spacing: .12em;
+  color: var(--sub);
+}
+
+
+/* --------------------
+   ABOUT
+-------------------- */
+
+.about {
+  margin-top: 55px;
+  padding-top: 28px;
+
+  border-top: 1px solid var(--line);
+}
+
+.about h2 {
+  margin: 0 0 12px;
+
+  font-family:
+    "Hiragino Mincho ProN",
+    "Yu Mincho",
+    serif;
+
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.about p {
+  max-width: 620px;
+  margin: 0;
+
+  font-size: 11px;
+  line-height: 2;
+  color: var(--sub);
+}
+
+
+/* --------------------
+   FOOTER
+-------------------- */
+
+footer {
+  padding: 30px 20px 45px;
+
+  text-align: center;
+
+  font-size: 9px;
+  letter-spacing: .15em;
+  color: #91897d;
+}
+
+
+/* --------------------
+   MOBILE
+-------------------- */
+
+@media (max-width: 550px) {
+
+  header {
+    padding-top: 55px;
+  }
+
+  .lab-card {
+    padding: 23px;
+  }
+
+}
 </style>
 </head>
 
 
 <body>
 
+
 <header>
 
-<a href="/satori-neko-prompt/" class="back">← さとりねこ AI研究ラボへ戻る</a>
+  <div class="eyebrow">
+    SATORI NEKO AI LAB
+  </div>
 
-<div class="lab">LAB 01</div>
+  <h1>
+    さとりねこ<br>
+    AI研究ラボ
+  </h1>
 
-<h1>DESIGN PROTOTYPE</h1>
+  <div class="english-title">
+    AI × DESIGN EXPERIMENTS
+  </div>
 
-<p class="lead">
-元デザインはそのままに。<br>
-生成AIを使って、印刷加工を施したときの
-仕上がりイメージを試作する実験ツールです。
-</p>
+  <p class="intro">
+    AIとデザインで、いろいろ実験しています。<br>
+    「これ、AIで試したらどうなる？」から始まった
+    小さな研究やツールを置いていく場所です。
+  </p>
 
 </header>
 
 
 <main>
 
-<!-- STEP 1 -->
+  <div class="section-label">
+    EXPERIMENTS
+  </div>
 
-<section class="card">
 
-<div class="step">STEP 01</div>
-<h2>印刷方法を選ぶ</h2>
+  <!-- LAB 01 -->
 
-<p class="small">
-試してみたい印刷表現を選択してください。
-複数選択できます。
-</p>
+  <a href="design/" class="lab-card">
 
-<div class="options">
+    <div class="lab-number">
+      LAB 01
+    </div>
 
-<div class="option">
-<input type="checkbox" id="spot2" onchange="toggleColors()">
-<label for="spot2">特色2色</label>
-</div>
+    <h2>
+      DESIGN PROTOTYPE
+    </h2>
 
-<div class="option">
-<input type="checkbox" id="white">
-<label for="white">白インキ</label>
-</div>
+    <p>
+      AIでデザインの仕上がりを試作する実験室。
+      まずは特色、箔押し、エンボス、UVなど、
+      印刷加工のイメージ検討から。
+    </p>
 
-<div class="option">
-<input type="checkbox" id="fluorescent">
-<label for="fluorescent">蛍光特色</label>
-</div>
+    <span class="open">
+      実験室をひらく →
+    </span>
 
-<div class="option">
-<input type="checkbox" id="metallic">
-<label for="metallic">メタリックインキ</label>
-</div>
+  </a>
 
-</div>
 
+  <!-- LAB 02 -->
 
-<div class="color-panel" id="colorPanel">
+  <div class="lab-card coming">
 
-<h3>特色を指定する</h3>
+    <div class="lab-number">
+      LAB 02
+    </div>
 
-<p class="small">
-色名と参考色を指定できます。
-HEX値はAIへ色味を伝えるための参考値です。
-</p>
+    <h2>
+      COMING SOON
+    </h2>
 
-<div class="color-row">
+    <p>
+      次の実験を準備中です。
+      AIとデザインで試してみたいことを、
+      少しずつ増やしていきます。
+    </p>
 
-<input type="color" id="color1"
-value="#34312D" oninput="syncPicker(1)">
+    <span class="coming-label">
+      PREPARING
+    </span>
 
-<input class="text-input"
-id="hex1"
-value="#34312D"
-oninput="syncHex(1)">
+  </div>
 
-<input class="text-input color-name"
-id="name1"
-value="墨色"
-placeholder="色名">
 
-</div>
+  <!-- ABOUT -->
 
+  <section class="about">
 
-<div class="color-row">
+    <div class="section-label">
+      ABOUT THIS LAB
+    </div>
 
-<input type="color" id="color2"
-value="#A34F43" oninput="syncPicker(2)">
+    <h2>
+      AIは、完成品をつくるだけじゃない。
+    </h2>
 
-<input class="text-input"
-id="hex2"
-value="#A34F43"
-oninput="syncHex(2)">
+    <p>
+      さとりねこ AI研究ラボでは、
+      生成AIを「考える・比べる・試す」ための道具として使い、
+      デザイン制作にどう活かせるかを実験しています。
+      <br><br>
+      ここで公開するツールやプロンプトは、
+      実制作に入る前のアイデア検討や
+      プロトタイプづくりを目的としています。
+    </p>
 
-<input class="text-input color-name"
-id="name2"
-value="朱赤"
-placeholder="色名">
-
-</div>
-
-
-<div class="presets">
-
-<button type="button"
-onclick="setPreset('#34312D','墨色','#A34F43','朱赤')">
-墨 × 朱赤
-</button>
-
-<button type="button"
-onclick="setPreset('#273B50','藍色','#C99B3D','山吹色')">
-藍 × 山吹
-</button>
-
-<button type="button"
-onclick="setPreset('#37483B','深緑','#A34F43','朱赤')">
-深緑 × 朱赤
-</button>
-
-<button type="button"
-onclick="setPreset('#34312D','墨色','#596F89','鈍い藍色')">
-墨 × 藍
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- STEP 2 -->
-
-<section class="card">
-
-<div class="step">STEP 02</div>
-<h2>加工を選ぶ</h2>
-
-<h3>箔加工</h3>
-
-<div class="options">
-
-<div class="option">
-<input type="checkbox" id="gold">
-<label for="gold">金箔</label>
-</div>
-
-<div class="option">
-<input type="checkbox" id="silver">
-<label for="silver">銀箔</label>
-</div>
-
-<div class="option">
-<input type="checkbox" id="colorfoil">
-<label for="colorfoil">色箔</label>
-</div>
-
-<div class="option">
-<input type="checkbox" id="holo">
-<label for="holo">ホログラム箔</label>
-</div>
-
-</div>
-
-
-<h3>凹凸加工</h3>
-
-<div class="options">
-
-<div class="option">
-<input type="checkbox" id="emboss">
-<label for="emboss">エンボス</label>
-</div>
-
-<div class="option">
-<input type="checkbox" id="deboss">
-<label for="deboss">デボス</label>
-</div>
-
-<div class="option">
-<input type="checkbox" id="blind">
-<label for="blind">空押し</label>
-</div>
-
-<div class="option">
-<input type="checkbox" id="foilemboss">
-<label for="foilemboss">箔＋エンボス</label>
-</div>
-
-</div>
-
-
-<h3>表面加工</h3>
-
-<div class="options">
-
-<div class="option">
-<input type="checkbox" id="uv">
-<label for="uv">スポットUV</label>
-</div>
-
-<div class="option">
-<input type="checkbox" id="raiseduv">
-<label for="raiseduv">厚盛りUV</label>
-</div>
-
-<div class="option">
-<input type="checkbox" id="gloss">
-<label for="gloss">グロスニス</label>
-</div>
-
-<div class="option">
-<input type="checkbox" id="matte">
-<label for="matte">マットニス</label>
-</div>
-
-</div>
-
-</section>
-
-
-<!-- STEP 3 -->
-
-<section class="card">
-
-<div class="step">STEP 03</div>
-<h2>加工する場所を指定</h2>
-
-<p class="small">
-空欄でも使えます。
-指定したい場合は「月とタイトル文字」など、
-できるだけ具体的に入力してください。
-</p>
-
-<textarea id="location"
-placeholder="例：
-金箔：月とタイトル文字
-エンボス：月のみ
-スポットUV：キャラクター部分"></textarea>
-
-<button class="generate" onclick="generatePrompt()">
-プロトタイプ用プロンプトを生成
-</button>
-
-</section>
-
-
-<!-- RESULT -->
-
-<section class="card">
-
-<div class="step">PROMPT</div>
-<h2>生成されたプロンプト</h2>
-
-<div class="prompt" id="result">
-加工方法を選択して、
-「プロトタイプ用プロンプトを生成」
-を押してください。
-</div>
-
-<button class="copy" onclick="copyPrompt()">
-プロンプトをコピー
-</button>
-
-<div class="notice">
-このツールは、生成AIを利用して印刷加工の方向性を
-検討するためのイメージ試作ツールです。<br><br>
-
-AIによる画像は、実際の特色インキ・箔・紙質・光沢・凹凸・
-見当・加工精度などを正確に再現するものではありません。
-実際の色校正・本機校正・加工見本の代替としては使用せず、
-企画・デザイン段階での方向性検討にご利用ください。
-</div>
-
-</section>
-
-
-<!-- SAMPLE -->
-
-<section class="card">
-
-<div class="step">PROTOTYPE SAMPLE</div>
-<h2>悟り猫で試してみました。</h2>
-
-<p class="small">
-元デザインに加工条件を指定して、
-AIで仕上がりイメージを試作した例です。
-</p>
-
-
-<h3>特色2色｜墨 × 朱赤</h3>
-
-<div class="sample-grid">
-
-<div class="sample-box">
-ORIGINAL<br>
-悟り猫の元デザイン
-
-<!--
-画像をGitHubに追加したら
-この文字を消して
-
-<img src="../images/sample-original.jpg" alt="元デザイン">
-
-に変更
--->
-</div>
-
-<div class="arrow">→</div>
-
-<div class="sample-box">
-AI PROTOTYPE<br>
-特色2色
-
-<!--
-<img src="../images/sample-spot2.jpg" alt="特色2色の作例">
--->
-</div>
-
-</div>
-
-
-<div class="chips">
-
-<div class="chip">
-<span class="dot" style="background:#34312D"></span>
-墨色
-</div>
-
-<div class="chip">
-<span class="dot" style="background:#A34F43"></span>
-朱赤
-</div>
-
-<div class="chip">
-特色2色
-</div>
-
-</div>
-
-
-<h3 style="margin-top:35px;">金箔＋エンボス</h3>
-
-<div class="sample-grid">
-
-<div class="sample-box">
-ORIGINAL
-</div>
-
-<div class="arrow">→</div>
-
-<div class="sample-box">
-AI PROTOTYPE<br>
-金箔＋エンボス
-
-<!--
-<img src="../images/sample-foil-emboss.jpg"
-alt="金箔とエンボスの作例">
--->
-</div>
-
-</div>
-
-
-<div class="chips">
-
-<div class="chip">金箔</div>
-<div class="chip">浅いエンボス</div>
-
-</div>
-
-</section>
+  </section>
 
 </main>
 
 
 <footer>
-SATORI NEKO AI LAB — DESIGN PROTOTYPE
+  SATORI NEKO AI LAB
 </footer>
 
-
-<script>
-
-function toggleColors() {
-  document.getElementById("colorPanel").style.display =
-    document.getElementById("spot2").checked
-    ? "block"
-    : "none";
-}
-
-
-function syncPicker(n) {
-
-  const value =
-    document.getElementById("color"+n).value.toUpperCase();
-
-  document.getElementById("hex"+n).value = value;
-}
-
-
-function syncHex(n) {
-
-  const value =
-    document.getElementById("hex"+n).value;
-
-  if(/^#[0-9A-Fa-f]{6}$/.test(value)) {
-    document.getElementById("color"+n).value = value;
-  }
-}
-
-
-function setPreset(c1,n1,c2,n2) {
-
-  document.getElementById("color1").value = c1;
-  document.getElementById("hex1").value = c1;
-  document.getElementById("name1").value = n1;
-
-  document.getElementById("color2").value = c2;
-  document.getElementById("hex2").value = c2;
-  document.getElementById("name2").value = n2;
-}
-
-
-function checked(id) {
-  return document.getElementById(id).checked;
-}
-
-
-function generatePrompt() {
-
-let sections = [];
-
-const base =
-`添付した元デザインを使用して、印刷・加工後の仕上がりイメージを確認するためのプロトタイプ画像を作成してください。
-
-【最重要】
-元画像のレイアウト、構図、文字内容、文字位置、イラスト、キャラクター、モチーフ、線画、比率を可能な限り変更しないでください。
-文字を書き換えたり、省略したり、新しい装飾やモチーフを追加したりしないでください。
-元デザインを新しく描き直すのではなく、指定した印刷・加工を施した場合の見え方だけを変更してください。`;
-
-sections.push(base);
-
-
-if(checked("spot2")) {
-
-const n1 =
-document.getElementById("name1").value || "特色1";
-
-const n2 =
-document.getElementById("name2").value || "特色2";
-
-const h1 =
-document.getElementById("hex1").value;
-
-const h2 =
-document.getElementById("hex2").value;
-
-sections.push(
-`【特色2色印刷】
-印刷は「${n1}（参考色 ${h1}）」と
-「${n2}（参考色 ${h2}）」の特色2色刷りを想定してください。
-
-使用する色は、この2色と紙地の色を基本としてください。
-フルカラー印刷のように不要な色を追加せず、
-濃度差や網点によって階調を表現してください。
-
-HEX値は画面上で色味を伝えるための参考値であり、
-実際の特色インキの厳密な色指定ではありません。`);
-}
-
-
-if(checked("white")) {
-sections.push(
-`【白インキ】
-白インキを使用した印刷として表現してください。
-紙色との違いと白インキの下地効果が自然に感じられるようにし、
-発光する白にはしないでください。`);
-}
-
-
-if(checked("fluorescent")) {
-sections.push(
-`【蛍光特色】
-蛍光特色インキを使用した印刷として表現してください。
-通常インキより鮮やかな発色を感じさせつつ、
-ネオン光のように自ら発光する表現にはしないでください。`);
-}
-
-
-if(checked("metallic")) {
-sections.push(
-`【メタリックインキ】
-メタリックインキを使用した印刷として表現してください。
-金属顔料による細かな反射感を持たせ、
-箔押しのような鏡面的な反射にはしないでください。`);
-}
-
-
-if(checked("gold")) {
-sections.push(
-`【金箔押し】
-指定箇所に金箔押しを施してください。
-正面では落ち着いた金属色に見え、
-斜めから光が当たった部分だけが上品に反射する
-現実的な箔押し表現にしてください。`);
-}
-
-
-if(checked("silver")) {
-sections.push(
-`【銀箔押し】
-指定箇所に銀箔押しを施してください。
-角度によって反射が変化する金属箔として表現し、
-不自然に白く発光させないでください。`);
-}
-
-
-if(checked("colorfoil")) {
-sections.push(
-`【色箔】
-指定箇所に色箔を施してください。
-印刷インキではなく、
-箔特有の均一な金属表面と角度による反射を表現してください。`);
-}
-
-
-if(checked("holo")) {
-sections.push(
-`【ホログラム箔】
-指定箇所にホログラム箔を施してください。
-角度によって虹色の反射が一部に現れるようにし、
-画像全体を虹色にしないでください。`);
-}
-
-
-if(checked("emboss")) {
-sections.push(
-`【エンボス】
-指定箇所にごく浅いエンボス加工を施してください。
-紙面からわずかに盛り上がり、
-凸部の縁に繊細なハイライトと影が生じる
-現実的な紙加工として表現してください。
-厚い立体シールのようにはしないでください。`);
-}
-
-
-if(checked("deboss")) {
-sections.push(
-`【デボス】
-指定箇所を紙面へ浅く押し込んだ状態にしてください。
-凹部とその縁に自然な陰影が生じる
-現実的な紙加工として表現してください。`);
-}
-
-
-if(checked("blind")) {
-sections.push(
-`【空押し】
-インキや箔を追加せず、
-紙そのものへの型押しによる凹凸だけで表現してください。
-斜めからの光による自然な陰影で加工が確認できるようにしてください。`);
-}
-
-
-if(checked("foilemboss")) {
-sections.push(
-`【箔押し＋エンボス】
-箔押し部分に浅いエンボス加工を組み合わせてください。
-箔面が紙面からわずかに盛り上がり、
-金属反射と浅い凹凸の両方が確認できるようにしてください。`);
-}
-
-
-if(checked("uv")) {
-sections.push(
-`【スポットUV】
-指定箇所のみに透明なスポットUV加工を施してください。
-通常時は透明で、
-斜めから光が当たった部分だけに控えめな光沢が現れるようにしてください。`);
-}
-
-
-if(checked("raiseduv")) {
-sections.push(
-`【厚盛りUV】
-指定箇所に透明な厚盛りUV加工を施してください。
-透明な光沢とわずかな盛り上がりを表現し、
-樹脂パーツのように厚くしすぎないでください。`);
-}
-
-
-if(checked("gloss")) {
-sections.push(
-`【グロスニス】
-指定範囲にグロスニスを施してください。
-印刷面に薄く自然な艶が加わった状態として表現してください。`);
-}
-
-
-if(checked("matte")) {
-sections.push(
-`【マットニス】
-指定範囲にマットニスを施してください。
-表面の反射を抑え、
-落ち着いた低光沢の印刷面として表現してください。`);
-}
-
-
-const location =
-document.getElementById("location").value.trim();
-
-if(location) {
-sections.push(
-`【加工箇所】
-以下の指定に従ってください。
-
-${location}`);
-}
-
-
-sections.push(
-`【仕上がり確認】
-実際に印刷されたサンプルを確認しているような、
-現実的な紙・インキ・加工の質感にしてください。
-
-加工の反射や凹凸が確認できるよう、
-柔らかな斜光を使用してください。
-
-ただし撮影演出によって元デザインが見づらくならないようにしてください。
-
-これはデザインそのものを再生成するための指示ではなく、
-元デザインに印刷加工を施した場合の
-仕上がり方向を確認するためのプロトタイプです。`);
-
-
-document.getElementById("result").innerText =
-sections.join("\n\n");
-
-}
-
-
-async function copyPrompt() {
-
-const text =
-document.getElementById("result").innerText;
-
-try {
-
-await navigator.clipboard.writeText(text);
-
-const button =
-document.querySelector(".copy");
-
-const old = button.innerText;
-
-button.innerText = "コピーしました 🐈";
-
-setTimeout(() => {
-button.innerText = old;
-},1500);
-
-} catch(e) {
-
-alert("コピーできませんでした。プロンプトを長押ししてコピーしてください。");
-
-}
-
-}
-
-</script>
 
 </body>
 </html>
