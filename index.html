@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>さとりねこ AI研究ラボ</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:
+    "Hiragino Mincho ProN",
+    "Yu Mincho",
+    serif;
+  color:#403b35;
+  background:
+    linear-gradient(rgba(250,247,238,.94),rgba(250,247,238,.94)),
+    repeating-linear-gradient(
+      45deg,
+      #ddd4c2 0px,
+      #ddd4c2 1px,
+      transparent 1px,
+      transparent 5px
+    );
+}
+
+header{
+  padding:55px 22px 40px;
+  text-align:center;
+}
+
+.logo{
+  font-size:12px;
+  letter-spacing:.2em;
+  color:#8a8175;
+}
+
+h1{
+  margin:10px 0 8px;
+  font-size:30px;
+  font-weight:600;
+}
+
+.subtitle{
+  margin:0;
+  color:#766e63;
+  font-size:14px;
+  line-height:1.8;
+}
+
+main{
+  width:min(720px,92%);
+  margin:auto;
+  padding-bottom:70px;
+}
+
+.card{
+  background:rgba(255,253,247,.82);
+  border:1px solid #d8cdbb;
+  border-radius:18px;
+  padding:22px;
+  margin-bottom:20px;
+  box-shadow:0 5px 18px rgba(70,60,45,.06);
+}
+
+.label{
+  display:inline-block;
+  font-size:11px;
+  letter-spacing:.12em;
+  color:#986b5f;
+  margin-bottom:7px;
+}
+
+h2{
+  font-size:19px;
+  margin:0 0 13px;
+}
+
+p{
+  font-size:14px;
+  line-height:1.8;
+}
+
+.prompt{
+  white-space:pre-wrap;
+  background:#f3eee3;
+  border-radius:12px;
+  padding:15px;
+  font-family:sans-serif;
+  font-size:13px;
+  line-height:1.7;
+  margin-top:12px;
+}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:14px;
+  margin-top:12px;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.copy{
+  background:#665f55;
+  color:white;
+}
+
+.copy:hover{
+  opacity:.88;
+}
+
+.options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:15px;
+}
+
+.option{
+  position:relative;
+}
+
+.option input{
+  position:absolute;
+  opacity:0;
+}
+
+.option label{
+  display:block;
+  padding:13px 8px;
+  border:1px solid #d4c7b4;
+  border-radius:11px;
+  text-align:center;
+  background:#faf7ef;
+  font-size:13px;
+  cursor:pointer;
+}
+
+.option input:checked + label{
+  background:#9d675c;
+  color:white;
+  border-color:#9d675c;
+}
+
+.generate{
+  background:#9d675c;
+  color:white;
+  margin-top:17px;
+}
+
+.note{
+  font-size:11px;
+  color:#857d72;
+  line-height:1.7;
+  margin-top:14px;
+}
+
+footer{
+  text-align:center;
+  font-size:11px;
+  color:#91887c;
+  padding:20px;
+}
+
+@media(max-width:500px){
+  h1{
+    font-size:26px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">SATORI NEKO</div>
+  <h1>さとりねこ AI研究ラボ</h1>
+  <p class="subtitle">
+    AIとデザインを、ゆるく実験。<br>
+    コピペで使えるプロンプトを置いています。
+  </p>
+</header>
+
+<main>
+
+<section class="card">
+
+<span class="label">BASIC PROMPT</span>
+<h2>ゆるい日本画風</h2>
+
+<p>
+キャラクターやモチーフを、日本画風のやさしい作品にする基本プロンプトです。
+</p>
+
+<div class="prompt" id="basic">日本画風のゆるい絵本タッチ。和紙の自然な繊維と紙肌、淡い岩絵具のような落ち着いた色彩、太く素朴な手描き線。余白を広く取り、背景は山、霞、草花などを簡潔に描く。古い日本画を思わせる静かで落ち着いた構図。キャラクターを主役として大きく見せ、写実的な表現、3D表現、過度な描き込み、派手すぎる色彩は避ける。</div>
+
+<button class="copy" onclick="copyBasic()">
+基本プロンプトをコピー
+</button>
+
+</section>
+
+
+<section class="card">
+
+<span class="label">PRINT FINISH</span>
+<h2>印刷加工を追加する</h2>
+
+<p>
+試してみたい加工を選択してください。複数選択できます。
+</p>
+
+<div class="options">
+
+<div class="option">
+<input type="checkbox" id="gold" value="作品の一部に控えめな金箔押しを施す。斜めから光が当たったときだけ金箔が上品に反射し、紙面に自然に馴染む現実的な箔押し表現にする。">
+<label for="gold">金箔押し</label>
+</div>
+
+<div class="option">
+<input type="checkbox" id="silver" value="作品の一部に銀箔押しを施す。銀箔は鏡面になりすぎず、斜光によって静かに反射する上品な印刷加工として表現する。">
+<label for="silver">銀箔押し</label>
+</div>
+
+<div class="option">
+<input type="checkbox" id="spot" value="印刷は墨色と落ち着いた朱赤の特色2色刷りとし、色数を抑えた印刷物らしい表現にする。">
+<label for="spot">特色2色</label>
+</div>
+
+<div class="option">
+<input type="checkbox" id="emboss" value="一部にごく浅いエンボス加工を施す。紙面からわずかに盛り上がり、斜めからの光によって凸部の縁に繊細なハイライトと自然な影が生じるようにする。">
+<label for="emboss">エンボス</label>
+</div>
+
+<div class="option">
+<input type="checkbox" id="blind" value="インキや箔を使用しない空押し加工を一部に施す。紙そのものの浅い凹凸と自然な陰影によって模様が見えるようにする。">
+<label for="blind">空押し</label>
+</div>
+
+<div class="option">
+<input type="checkbox" id="deboss" value="一部に浅いデボス加工を施し、紙面が自然にへこんだような現実的な凹みと影を表現する。">
+<label for="deboss">デボス</label>
+</div>
+
+<div class="option">
+<input type="checkbox" id="uv" value="一部に透明なスポットUV加工を施す。通常は紙の質感を残し、斜めから光が当たった部分だけに控えめな光沢が見えるようにする。">
+<label for="uv">スポットUV</label>
+</div>
+
+<div class="option">
+<input type="checkbox" id="white" value="色紙への印刷を想定し、一部に白インキを使用する。白インキの下地効果と紙色の差が自然に感じられる印刷物として表現する。">
+<label for="white">白インキ</label>
+</div>
+
+</div>
+
+<button class="generate" onclick="generatePrompt()">
+選んだ加工でプロンプトを作る
+</button>
+
+</section>
+
+
+<section class="card">
+
+<span class="label">YOUR PROMPT</span>
+<h2>完成プロンプト</h2>
+
+<p>
+基本プロンプトと選択した加工がここで一つになります。
+</p>
+
+<div class="prompt" id="result">
+上の加工を選択すると、ここに完成プロンプトが表示されます。
+</div>
+
+<button class="copy" onclick="copyResult()">
+完成プロンプトをコピー
+</button>
+
+<p class="note">
+※生成AIによる加工表現は、実際の印刷・加工結果を保証するものではありません。紙質、インキ、箔、光沢、凹凸、見当などは実際の印刷条件によって異なります。デザイン検討やプロトタイプ制作の参考としてご利用ください。
+</p>
+
+</section>
+
+</main>
+
+<footer>
+さとりねこ AI研究ラボ
+</footer>
+
+
+<script>
+
+function copyText(text){
+  navigator.clipboard.writeText(text).then(()=>{
+    alert("コピーしました🐈");
+  });
+}
+
+function copyBasic(){
+  const text =
+    document.getElementById("basic").innerText;
+
+  copyText(text);
+}
+
+function generatePrompt(){
+
+  const basic =
+    document.getElementById("basic").innerText;
+
+  const checks =
+    document.querySelectorAll(
+      '.options input:checked'
+    );
+
+  let additions = [];
+
+  checks.forEach(item=>{
+    additions.push(item.value);
+  });
+
+  let result = basic;
+
+  if(additions.length > 0){
+    result +=
+      "\n\n【追加する印刷加工】\n" +
+      additions.join("\n");
+  }
+
+  document.getElementById("result").innerText =
+    result;
+}
+
+function copyResult(){
+
+  const text =
+    document.getElementById("result").innerText;
+
+  copyText(text);
+}
+
+</script>
+
+</body>
+</html>
