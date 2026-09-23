@@ -7,171 +7,174 @@
 <title>さとりねこ AI研究ラボ</title>
 
 <style>
-*{
-  box-sizing:border-box;
+* { box-sizing: border-box; }
+
+:root {
+  --paper: #f5f0e6;
+  --paper-light: #fcfaf4;
+  --ink: #34312d;
+  --sub: #777064;
+  --line: #d8cfbf;
+  --accent: #9b5148;
 }
 
-body{
-  margin:0;
-  font-family:
-    "Hiragino Mincho ProN",
-    "Yu Mincho",
-    serif;
-  color:#403b35;
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Hiragino Sans", "Yu Gothic", sans-serif;
+
   background:
-    linear-gradient(rgba(250,247,238,.94),rgba(250,247,238,.94)),
+    linear-gradient(rgba(247,243,234,.96), rgba(247,243,234,.96)),
     repeating-linear-gradient(
-      45deg,
-      #ddd4c2 0px,
-      #ddd4c2 1px,
+      35deg,
+      #ddd5c5 0,
+      #ddd5c5 1px,
       transparent 1px,
-      transparent 5px
+      transparent 7px
     );
 }
 
-header{
-  padding:55px 22px 40px;
-  text-align:center;
+header {
+  width: min(850px, 90%);
+  margin: auto;
+  padding: 80px 0 55px;
 }
 
-.logo{
-  font-size:12px;
-  letter-spacing:.2em;
-  color:#8a8175;
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: .25em;
+  color: var(--accent);
 }
 
-h1{
-  margin:10px 0 8px;
-  font-size:30px;
-  font-weight:600;
+h1 {
+  margin: 12px 0 15px;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-size: clamp(32px, 7vw, 54px);
+  font-weight: 500;
+  line-height: 1.3;
 }
 
-.subtitle{
-  margin:0;
-  color:#766e63;
-  font-size:14px;
-  line-height:1.8;
+.intro {
+  max-width: 580px;
+  color: var(--sub);
+  font-size: 14px;
+  line-height: 2;
 }
 
-main{
-  width:min(720px,92%);
-  margin:auto;
-  padding-bottom:70px;
+main {
+  width: min(850px, 90%);
+  margin: auto;
+  padding-bottom: 90px;
 }
 
-.card{
-  background:rgba(255,253,247,.82);
-  border:1px solid #d8cdbb;
-  border-radius:18px;
-  padding:22px;
-  margin-bottom:20px;
-  box-shadow:0 5px 18px rgba(70,60,45,.06);
+.section-title {
+  margin-bottom: 20px;
+  font-size: 11px;
+  letter-spacing: .22em;
+  color: var(--sub);
 }
 
-.label{
-  display:inline-block;
-  font-size:11px;
-  letter-spacing:.12em;
-  color:#986b5f;
-  margin-bottom:7px;
+.lab-card {
+  display: block;
+  position: relative;
+  padding: 30px;
+  margin-bottom: 18px;
+
+  background: rgba(255,253,247,.88);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+
+  color: inherit;
+  text-decoration: none;
+
+  box-shadow: 0 6px 22px rgba(60,50,35,.05);
+  transition: transform .2s, box-shadow .2s;
 }
 
-h2{
-  font-size:19px;
-  margin:0 0 13px;
+.lab-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(60,50,35,.09);
 }
 
-p{
-  font-size:14px;
-  line-height:1.8;
+.lab-number {
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: var(--accent);
 }
 
-.prompt{
-  white-space:pre-wrap;
-  background:#f3eee3;
-  border-radius:12px;
-  padding:15px;
-  font-family:sans-serif;
-  font-size:13px;
-  line-height:1.7;
-  margin-top:12px;
+.lab-card h2 {
+  margin: 10px 0 7px;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-size: 25px;
+  font-weight: 500;
 }
 
-button{
-  width:100%;
-  border:0;
-  border-radius:12px;
-  padding:14px;
-  margin-top:12px;
-  font-size:14px;
-  cursor:pointer;
+.lab-card p {
+  max-width: 570px;
+  margin: 0;
+  color: var(--sub);
+  font-size: 13px;
+  line-height: 1.8;
 }
 
-.copy{
-  background:#665f55;
-  color:white;
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 18px;
 }
 
-.copy:hover{
-  opacity:.88;
+.tag {
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper-light);
+  font-size: 10px;
+  color: var(--sub);
 }
 
-.options{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-  margin-top:15px;
+.open {
+  display: inline-block;
+  margin-top: 22px;
+  font-size: 12px;
+  color: var(--accent);
 }
 
-.option{
-  position:relative;
+.coming {
+  opacity: .52;
+  cursor: default;
 }
 
-.option input{
-  position:absolute;
-  opacity:0;
+.coming:hover {
+  transform: none;
+  box-shadow: 0 6px 22px rgba(60,50,35,.05);
 }
 
-.option label{
-  display:block;
-  padding:13px 8px;
-  border:1px solid #d4c7b4;
-  border-radius:11px;
-  text-align:center;
-  background:#faf7ef;
-  font-size:13px;
-  cursor:pointer;
+.note {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--sub);
+  font-size: 11px;
+  line-height: 1.9;
 }
 
-.option input:checked + label{
-  background:#9d675c;
-  color:white;
-  border-color:#9d675c;
+footer {
+  padding: 25px;
+  text-align: center;
+  color: #91897d;
+  font-size: 10px;
+  letter-spacing: .1em;
 }
 
-.generate{
-  background:#9d675c;
-  color:white;
-  margin-top:17px;
-}
+@media(max-width: 520px) {
+  header {
+    padding-top: 55px;
+  }
 
-.note{
-  font-size:11px;
-  color:#857d72;
-  line-height:1.7;
-  margin-top:14px;
-}
-
-footer{
-  text-align:center;
-  font-size:11px;
-  color:#91887c;
-  padding:20px;
-}
-
-@media(max-width:500px){
-  h1{
-    font-size:26px;
+  .lab-card {
+    padding: 23px;
   }
 }
 </style>
@@ -180,176 +183,72 @@ footer{
 <body>
 
 <header>
-  <div class="logo">SATORI NEKO</div>
-  <h1>さとりねこ AI研究ラボ</h1>
-  <p class="subtitle">
-    AIとデザインを、ゆるく実験。<br>
-    コピペで使えるプロンプトを置いています。
+  <div class="eyebrow">SATORI NEKO AI LAB</div>
+
+  <h1>さとりねこ<br>AI研究ラボ</h1>
+
+  <p class="intro">
+    AIとデザインで、いろいろ実験しています。<br>
+    「これ、AIで試したらどうなる？」から始まった
+    小さな研究やツールを置いていく場所です。
   </p>
 </header>
 
 <main>
 
-<section class="card">
+  <div class="section-title">EXPERIMENTS</div>
 
-<span class="label">BASIC PROMPT</span>
-<h2>ゆるい日本画風</h2>
+  <!-- LAB 01 -->
+  <a class="lab-card" href="design/">
 
-<p>
-キャラクターやモチーフを、日本画風のやさしい作品にする基本プロンプトです。
-</p>
+    <div class="lab-number">LAB 01</div>
 
-<div class="prompt" id="basic">日本画風のゆるい絵本タッチ。和紙の自然な繊維と紙肌、淡い岩絵具のような落ち着いた色彩、太く素朴な手描き線。余白を広く取り、背景は山、霞、草花などを簡潔に描く。古い日本画を思わせる静かで落ち着いた構図。キャラクターを主役として大きく見せ、写実的な表現、3D表現、過度な描き込み、派手すぎる色彩は避ける。</div>
+    <h2>DESIGN PROTOTYPE</h2>
 
-<button class="copy" onclick="copyBasic()">
-基本プロンプトをコピー
-</button>
+    <p>
+      AIでデザインの仕上がりを試作する実験室。
+      まずは特色、箔押し、エンボス、UVなど、
+      印刷加工のイメージ検討から。
+    </p>
 
-</section>
+    <div class="tags">
+      <span class="tag">特色</span>
+      <span class="tag">箔押し</span>
+      <span class="tag">エンボス</span>
+      <span class="tag">UV</span>
+      <span class="tag">AI</span>
+    </div>
 
+    <span class="open">実験を見る →</span>
 
-<section class="card">
-
-<span class="label">PRINT FINISH</span>
-<h2>印刷加工を追加する</h2>
-
-<p>
-試してみたい加工を選択してください。複数選択できます。
-</p>
-
-<div class="options">
-
-<div class="option">
-<input type="checkbox" id="gold" value="作品の一部に控えめな金箔押しを施す。斜めから光が当たったときだけ金箔が上品に反射し、紙面に自然に馴染む現実的な箔押し表現にする。">
-<label for="gold">金箔押し</label>
-</div>
-
-<div class="option">
-<input type="checkbox" id="silver" value="作品の一部に銀箔押しを施す。銀箔は鏡面になりすぎず、斜光によって静かに反射する上品な印刷加工として表現する。">
-<label for="silver">銀箔押し</label>
-</div>
-
-<div class="option">
-<input type="checkbox" id="spot" value="印刷は墨色と落ち着いた朱赤の特色2色刷りとし、色数を抑えた印刷物らしい表現にする。">
-<label for="spot">特色2色</label>
-</div>
-
-<div class="option">
-<input type="checkbox" id="emboss" value="一部にごく浅いエンボス加工を施す。紙面からわずかに盛り上がり、斜めからの光によって凸部の縁に繊細なハイライトと自然な影が生じるようにする。">
-<label for="emboss">エンボス</label>
-</div>
-
-<div class="option">
-<input type="checkbox" id="blind" value="インキや箔を使用しない空押し加工を一部に施す。紙そのものの浅い凹凸と自然な陰影によって模様が見えるようにする。">
-<label for="blind">空押し</label>
-</div>
-
-<div class="option">
-<input type="checkbox" id="deboss" value="一部に浅いデボス加工を施し、紙面が自然にへこんだような現実的な凹みと影を表現する。">
-<label for="deboss">デボス</label>
-</div>
-
-<div class="option">
-<input type="checkbox" id="uv" value="一部に透明なスポットUV加工を施す。通常は紙の質感を残し、斜めから光が当たった部分だけに控えめな光沢が見えるようにする。">
-<label for="uv">スポットUV</label>
-</div>
-
-<div class="option">
-<input type="checkbox" id="white" value="色紙への印刷を想定し、一部に白インキを使用する。白インキの下地効果と紙色の差が自然に感じられる印刷物として表現する。">
-<label for="white">白インキ</label>
-</div>
-
-</div>
-
-<button class="generate" onclick="generatePrompt()">
-選んだ加工でプロンプトを作る
-</button>
-
-</section>
+  </a>
 
 
-<section class="card">
+  <!-- LAB 02 -->
+  <div class="lab-card coming">
 
-<span class="label">YOUR PROMPT</span>
-<h2>完成プロンプト</h2>
+    <div class="lab-number">LAB 02</div>
 
-<p>
-基本プロンプトと選択した加工がここで一つになります。
-</p>
+    <h2>COMING SOON</h2>
 
-<div class="prompt" id="result">
-上の加工を選択すると、ここに完成プロンプトが表示されます。
-</div>
+    <p>
+      次の実験を考え中です。
+    </p>
 
-<button class="copy" onclick="copyResult()">
-完成プロンプトをコピー
-</button>
+  </div>
 
-<p class="note">
-※生成AIによる加工表現は、実際の印刷・加工結果を保証するものではありません。紙質、インキ、箔、光沢、凹凸、見当などは実際の印刷条件によって異なります。デザイン検討やプロトタイプ制作の参考としてご利用ください。
-</p>
 
-</section>
+  <div class="note">
+    このラボは実験中です。<br>
+    AIの出力は実際の製品・印刷・加工結果を保証するものではありません。
+    各実験ページの注意事項をご確認ください。
+  </div>
 
 </main>
 
 <footer>
-さとりねこ AI研究ラボ
+  SATORI NEKO AI LAB
 </footer>
-
-
-<script>
-
-function copyText(text){
-  navigator.clipboard.writeText(text).then(()=>{
-    alert("コピーしました🐈");
-  });
-}
-
-function copyBasic(){
-  const text =
-    document.getElementById("basic").innerText;
-
-  copyText(text);
-}
-
-function generatePrompt(){
-
-  const basic =
-    document.getElementById("basic").innerText;
-
-  const checks =
-    document.querySelectorAll(
-      '.options input:checked'
-    );
-
-  let additions = [];
-
-  checks.forEach(item=>{
-    additions.push(item.value);
-  });
-
-  let result = basic;
-
-  if(additions.length > 0){
-    result +=
-      "\n\n【追加する印刷加工】\n" +
-      additions.join("\n");
-  }
-
-  document.getElementById("result").innerText =
-    result;
-}
-
-function copyResult(){
-
-  const text =
-    document.getElementById("result").innerText;
-
-  copyText(text);
-}
-
-</script>
 
 </body>
 </html>
